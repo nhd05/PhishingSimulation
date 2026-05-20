@@ -1,16 +1,32 @@
-# React + Vite
+## Running the Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+```bash
+cd frontend
+npm install
+npm start
+```
 
-Currently, two official plugins are available:
+## Running the Backend
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+cd backend
+pip install -r requirements.txt
+python app.py
+```
 
-## React Compiler
+## Running Docker
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+docker build -t fullstack-app .
+docker run -p 5000:5000 fullstack-app
+```
 
-## Expanding the ESLint configuration
+## CI/CD Pipeline
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The pipeline automatically:
+1. Pulls the newest code
+2. Runs ESLint and Flake8
+3. Runs frontend/backend tests
+4. Builds a Docker image
+5. Deploys the container
+6. Runs smoke tests
