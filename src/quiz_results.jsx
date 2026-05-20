@@ -1,6 +1,6 @@
 import { useState } from "react";
-import questions from './Quiz (1)';
-import Quiz from './Quiz (1)';
+import questions from './Quiz';
+import Quiz from './Quiz';
 
 export const Results = ({ answer }) => {
     return (
