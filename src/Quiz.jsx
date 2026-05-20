@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Results } from './quiz_results';
 
 const questions = [
   {
@@ -10,6 +11,7 @@ const questions = [
       "A professional logo",
       "Proper spelling and grammar",
     ],
+     feedback: "Phishing emails may pretend to be from a known and reputable organization such as banks."
   },
   {
     id: 2,
@@ -21,6 +23,7 @@ const questions = [
       "Delete it and report it as phishing",
       "Forward it to a friend",
     ],
+    feedback: "Phishing emails are known to have suspicious links that lead to fake pages, and request personal data."
   },
   {
     id: 3,
@@ -32,6 +35,7 @@ const questions = [
       "URGENT: Your account will be suspended in 24 hours",
       "Your package has shipped",
     ],
+    feedback: "Common phishing techniques try to make the user panic so that they click on suspicious links."
   },
   {
     id: 4,
@@ -43,6 +47,7 @@ const questions = [
       "Reply to the sender asking if it's real",
       "Download any attachments first",
     ],
+    feedback: "To stay safe do not click unknown links, check the sender's email address, and verify messages directly from the official website."
   },
 ];
 
