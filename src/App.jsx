@@ -1,13 +1,11 @@
-import { Routes, Route } from "react-router-dom";
-
 import Home from "./Home";
+import PasswordSecurity from "./PasswordSecurity";
+import Phishing from "./Phishing";
+import Quiz from "./Quiz";
+import SocialEngineering from "./SocialEngineering";
 import TrainingModules from "./TrainingModules";
 
-import Phishing from "./Phishing";
-import PasswordSecurity from "./PasswordSecurity";
-import SocialEngineering from "./SocialEngineering";
-
-import Quiz from "./Quiz";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
 	return (
