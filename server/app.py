@@ -26,7 +26,9 @@ answers_key = {
     "3": "URGENT: Your account will be suspended in 24 hours",
     "4": "Hover over it to check the real URL"
 }
-
+@app.route("/")
+def home():
+    return "Flask Docker API is running!"
 
 # 3. API ENDPOINT (React talks to this)
 @app.route("/quiz", methods=["POST"])
@@ -43,4 +45,4 @@ def quiz():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
