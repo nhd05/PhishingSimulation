@@ -108,6 +108,7 @@ export default function Quiz() {
       ))}
 
       <button
+        type="button"
         onClick={handleSubmit}
         disabled={Object.keys(answers).length !== questions.length}
         style={{ padding: "10px", marginTop: "10px" }}
@@ -116,6 +117,7 @@ export default function Quiz() {
       </button>
 
       <button
+        type="button"
         onClick={resetQuiz}
         style={{ padding: "10px", marginLeft: "10px" }}
       >
