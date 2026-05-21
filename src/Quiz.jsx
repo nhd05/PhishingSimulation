@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { Results } from './quiz_results';
 
 function shuffleArray(array) {
 	return [...array].sort(() => Math.random() - 0.5);
@@ -336,6 +337,10 @@ export default function Quiz() {
 		if (Object.keys(answers).length !== questions.length) {
 			alert("Please answer all questions before submitting.");
 			return;
+		} else {
+			return(
+				<Results/>
+			)
 		}
 
 		fetch("https://phishingsimulation-cjvx.onrender.com/quiz", {
