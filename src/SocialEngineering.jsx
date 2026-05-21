@@ -5,8 +5,6 @@ export default function SocialEngineering() {
 		<div style={{ padding: "20px" }}>
 			<h1>Social Engineering</h1>
 
-		
-
 			<p>
 				Social engineering is the broader umbrella that phishing falls under. At
 				its core, it's the art of manipulating people into giving up
