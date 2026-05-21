@@ -7,55 +7,83 @@ export default function Home() {
 		<div style={styles.page}>
 			<nav style={styles.navbar}>
 				<div style={styles.logo}>🛡️ PhishSim</div>
-				<button type="button" onClick={goToTraining} style={styles.navButton}>
+
+				<button
+					type="button"
+					onClick={goToTraining}
+					style={styles.navButton}
+				>
 					Start Training
 				</button>
 			</nav>
 
 			<main style={styles.main}>
 				<section style={styles.hero}>
-					<div style={styles.badge}>Welcome to your Cyber Awareness Training</div>
-					<h1 style={styles.title}>Phishing Simulation</h1>
-					<p style={styles.subtitle}>
-						Learn how to recognize phishing attacks, protect your information, and
-						stay secure online through interactive training modules.
-					</p>
-					<div style={styles.buttonRow}>
-						<button type="button" onClick={goToTraining} style={styles.primaryButton}>
-							Start Training →
-						</button>
+					<div style={styles.badge}>
+						Welcome to your cyber awareness training
 					</div>
-				</section>
 
-				<section style={styles.quickStats}>
-					<div style={styles.stat}>✅ Learn at your own pace</div>
-					<div style={styles.stat}>📊 Track your progress</div>
-					<div style={styles.stat}>🔐 Stay secure online</div>
+					<h1 style={styles.title}>Phishing Simulation</h1>
+
+					<p style={styles.subtitle}>
+						Learn how to recognize phishing attacks,
+						protect your information, and stay secure
+						online through interactive training modules.
+					</p>
+
+					<button
+						type="button"
+						onClick={goToTraining}
+						style={styles.heroButton}
+					>
+						Start Training →
+					</button>
 				</section>
 
 				<section style={styles.cardGrid}>
-					<div style={{ ...styles.card, borderTop: "4px solid #3b82f6" }}>
+					<div
+						style={{
+							...styles.card,
+							borderTop: "4px solid #38bdf8",
+						}}
+					>
 						<h2>📧 Phishing Detection</h2>
+
 						<p>
-							Learn how attackers disguise malicious emails and suspicious links.
+							Learn how attackers disguise malicious
+							emails and fake websites.
 						</p>
 					</div>
 
-					<div style={{ ...styles.card, borderTop: "4px solid #22c55e" }}>
+					<div
+						style={{
+							...styles.card,
+							borderTop: "4px solid #22c55e",
+						}}
+					>
 						<h2>🔐 Password Security</h2>
+
 						<p>
-							Understand password best practices and stronger account protection.
+							Understand password best practices and
+							stronger account protection.
 						</p>
 					</div>
 
-					<div style={{ ...styles.card, borderTop: "4px solid #f59e0b" }}>
+					<div
+						style={{
+							...styles.card,
+							borderTop: "4px solid #f59e0b",
+						}}
+					>
 						<h2>🧠 Social Engineering</h2>
-						<p>Explore tactics attackers use to trick users into unsafe actions.</p>
+
+						<p>
+							Explore tactics attackers use to trick
+							users into unsafe actions.
+						</p>
 					</div>
 				</section>
 			</main>
-
-			<footer style={styles.footer}>© 2026 PhishSim</footer>
 		</div>
 	);
 }
@@ -64,111 +92,111 @@ const styles = {
 	page: {
 		minHeight: "100vh",
 		backgroundColor: "#0f172a",
-		color: "#f8fafc",
-		fontFamily: "Arial, sans-serif",
+		color: "#ffffff",
+		fontFamily:
+			"Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
+		padding: "0",
+		margin: "0",
 	},
+
 	navbar: {
-		height: "75px",
-		padding: "0 50px",
 		display: "flex",
 		justifyContent: "space-between",
 		alignItems: "center",
-		borderBottom: "1px solid rgba(148, 163, 184, 0.15)",
+		padding: "24px 48px",
+		borderBottom: "1px solid rgba(255,255,255,0.08)",
 		backgroundColor: "#111827",
+		position: "sticky",
+		top: "0",
+		zIndex: "10",
 	},
+
 	logo: {
-		fontSize: "24px",
-		fontWeight: "bold",
+		fontSize: "1.2rem",
+		fontWeight: "700",
+		color: "#f8fafc",
+		letterSpacing: "0.5px",
 	},
+
 	navButton: {
-		padding: "10px 18px",
-		borderRadius: "8px",
-		border: "1px solid #3b82f6",
-		backgroundColor: "transparent",
-		color: "#bfdbfe",
-		fontWeight: "bold",
+		background: "#2563eb",
+		border: "none",
+		color: "white",
+		padding: "12px 22px",
+		borderRadius: "12px",
+		fontSize: "0.95rem",
+		fontWeight: "600",
 		cursor: "pointer",
+		transition: "all 0.2s ease",
+		boxShadow: "0 4px 14px rgba(37,99,235,0.35)",
 	},
+
 	main: {
 		maxWidth: "1150px",
-		margin: "auto",
+		margin: "0 auto",
 		padding: "70px 24px",
 	},
+
 	hero: {
 		textAlign: "center",
-		marginBottom: "65px",
+		marginBottom: "70px",
 	},
+
 	badge: {
 		display: "inline-block",
 		padding: "10px 18px",
 		borderRadius: "999px",
-		backgroundColor: "rgba(37, 99, 235, 0.15)",
-		border: "1px solid rgba(59, 130, 246, 0.35)",
-		color: "#bfdbfe",
-		fontWeight: "bold",
+		background: "rgba(37,99,235,0.15)",
+		border: "1px solid rgba(59,130,246,0.35)",
+		color: "#93c5fd",
+		fontSize: "0.95rem",
+		fontWeight: "600",
 		marginBottom: "24px",
 	},
+
 	title: {
-		fontSize: "64px",
-		marginBottom: "20px",
-		fontWeight: "bold",
+		fontSize: "4rem",
+		fontWeight: "800",
+		lineHeight: "1.1",
+		marginBottom: "24px",
+		color: "#f8fafc",
 	},
+
 	subtitle: {
-		fontSize: "21px",
-		maxWidth: "760px",
-		margin: "auto",
-		lineHeight: "1.7",
+		fontSize: "1.2rem",
+		lineHeight: "1.8",
 		color: "#cbd5e1",
+		maxWidth: "760px",
+		margin: "0 auto 40px auto",
 	},
-	buttonRow: {
-		marginTop: "35px",
-		display: "flex",
-		justifyContent: "center",
-		gap: "18px",
-		flexWrap: "wrap",
-	},
-	primaryButton: {
-		padding: "16px 30px",
-		borderRadius: "10px",
+
+	heroButton: {
+		background: "linear-gradient(90deg, #2563eb, #06b6d4)",
 		border: "none",
-		backgroundColor: "#2563eb",
 		color: "white",
-		fontWeight: "bold",
-		fontSize: "17px",
+		padding: "16px 34px",
+		borderRadius: "14px",
+		fontSize: "1rem",
+		fontWeight: "700",
 		cursor: "pointer",
-		transition: "0.2s",
+		boxShadow: "0 8px 24px rgba(37,99,235,0.35)",
+		transition: "transform 0.2s ease",
 	},
-	quickStats: {
-		display: "grid",
-		gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-		gap: "18px",
-		marginBottom: "40px",
-	},
-	stat: {
-		backgroundColor: "#111827",
-		border: "1px solid rgba(148, 163, 184, 0.15)",
-		padding: "18px",
-		borderRadius: "12px",
-		textAlign: "center",
-		color: "#dbeafe",
-	},
+
 	cardGrid: {
 		display: "grid",
-		gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+		gridTemplateColumns:
+			"repeat(auto-fit, minmax(280px, 1fr))",
 		gap: "24px",
-		marginBottom: "35px",
 	},
+
 	card: {
 		backgroundColor: "#111827",
-		padding: "30px",
-		borderRadius: "14px",
-		border: "1px solid rgba(148, 163, 184, 0.15)",
-		boxShadow: "0 8px 20px rgba(0,0,0,0.2)",
-	},
-	footer: {
-		textAlign: "center",
-		padding: "24px",
-		color: "#94a3b8",
-		borderTop: "1px solid rgba(148, 163, 184, 0.1)",
+		padding: "32px",
+		borderRadius: "20px",
+		border: "1px solid rgba(255,255,255,0.06)",
+		boxShadow: "0 8px 24px rgba(0,0,0,0.35)",
+		transition: "all 0.2s ease",
+		lineHeight: "1.8",
 	},
 };
