@@ -1,0 +1,11 @@
+{
+	"files": {
+		"includes": ["src/**", "*.js", "*.jsx", "*.json", "*.ts", "*.tsx"]
+	},
+	"formatter": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": true
+	}
+}
