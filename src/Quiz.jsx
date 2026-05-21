@@ -336,7 +336,6 @@ export default function Quiz() {
 	const handleSubmit = () => {
 		if (Object.keys(answers).length !== questions.length) {
 			alert("Please answer all questions before submitting.");
-			return;
 		} else {
 			return(
 				<Results/>
