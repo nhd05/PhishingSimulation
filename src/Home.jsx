@@ -20,7 +20,7 @@ export default function Home() {
 			<main style={styles.main}>
 				<section style={styles.hero}>
 					<div style={styles.badge}>
-						Welcome to Cyber Awareness Training
+						Welcome to your Cyber Awareness Training
 					</div>
 
 					<h1 style={styles.title}>Phishing Simulation</h1>
@@ -38,10 +38,6 @@ export default function Home() {
 							style={styles.primaryButton}
 						>
 							Start Training →
-						</button>
-
-						<button type="button" style={styles.secondaryButton}>
-							Learn More
 						</button>
 					</div>
 				</section>
@@ -102,25 +98,6 @@ export default function Home() {
 							users into unsafe actions.
 						</p>
 					</div>
-				</section>
-
-				<section style={styles.ctaBox}>
-					<div>
-						<h2>Ready to begin?</h2>
-
-						<p>
-							Start the training modules and improve
-							your cybersecurity awareness.
-						</p>
-					</div>
-
-					<button
-						type="button"
-						onClick={goToTraining}
-						style={styles.ctaButton}
-					>
-						Go to Training →
-					</button>
 				</section>
 			</main>
 
@@ -220,21 +197,9 @@ const styles = {
 		transition: "0.2s",
 	},
 
-	secondaryButton: {
-		padding: "16px 28px",
-		borderRadius: "10px",
-		border: "1px solid rgba(148, 163, 184, 0.25)",
-		backgroundColor: "transparent",
-		color: "#f8fafc",
-		fontWeight: "bold",
-		fontSize: "17px",
-		cursor: "pointer",
-	},
-
 	quickStats: {
 		display: "grid",
-		gridTemplateColumns:
-			"repeat(auto-fit, minmax(220px, 1fr))",
+		gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
 		gap: "18px",
 		marginBottom: "40px",
 	},
@@ -250,8 +215,7 @@ const styles = {
 
 	cardGrid: {
 		display: "grid",
-		gridTemplateColumns:
-			"repeat(auto-fit, minmax(280px, 1fr))",
+		gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
 		gap: "24px",
 		marginBottom: "35px",
 	},
@@ -262,28 +226,6 @@ const styles = {
 		borderRadius: "14px",
 		border: "1px solid rgba(148, 163, 184, 0.15)",
 		boxShadow: "0 8px 20px rgba(0,0,0,0.2)",
-	},
-
-	ctaBox: {
-		backgroundColor: "#111827",
-		borderRadius: "14px",
-		padding: "28px",
-		display: "flex",
-		justifyContent: "space-between",
-		alignItems: "center",
-		gap: "20px",
-		border: "1px solid rgba(59, 130, 246, 0.2)",
-		marginTop: "20px",
-	},
-
-	ctaButton: {
-		padding: "14px 24px",
-		borderRadius: "10px",
-		border: "none",
-		backgroundColor: "#3b82f6",
-		color: "white",
-		fontWeight: "bold",
-		cursor: "pointer",
 	},
 
 	footer: {
