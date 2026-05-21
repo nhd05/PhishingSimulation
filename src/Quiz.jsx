@@ -339,7 +339,7 @@ export default function Quiz() {
 			return;
 		}
 
-		fetch("http://127.0.0.1:5000/quiz", {
+		fetch("https://phishingsimulation-cjvx.onrender.com/quiz", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
