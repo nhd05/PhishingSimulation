@@ -338,7 +338,7 @@ export default function Quiz() {
 		if (Object.keys(answers).length !== questions.length) {
 			alert("Please answer all questions before submitting.");
 		} else {
-			naviagte("/Results");
+			_navigate("/Results");
 		}
 
 		fetch("https://phishingsimulation-cjvx.onrender.com/quiz", {
