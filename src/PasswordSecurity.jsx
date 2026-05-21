@@ -62,7 +62,7 @@ export default function PasswordSecurity() {
 			</p>
 			<button
 				type="button"
-				onClick={() => navigate("/quiz")}
+				onClick={() => navigate("/quiz?module=passwordsecurity")}
 				style={{
 					marginTop: "30px",
 					padding: "10px 20px",

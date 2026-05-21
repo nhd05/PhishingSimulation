@@ -81,7 +81,7 @@ export default function Phishing() {
 			</p>
 			<button
 				type="button"
-				onClick={() => navigate("/quiz")}
+				onClick={() => navigate("/quiz?module=phishing")}
 				style={{
 					marginTop: "30px",
 					padding: "10px 20px",

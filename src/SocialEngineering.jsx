@@ -66,7 +66,7 @@ export default function SocialEngineering() {
 			</p>
 			<button
 				type="button"
-				onClick={() => navigate("/quiz")}
+				onClick={() => navigate("/quiz?module=socialengineering")}
 				style={{
 					marginTop: "30px",
 					padding: "10px 20px",
