@@ -54,7 +54,7 @@ const questionSets = {
 				"To stay safe do not click unknown links, check the sender's email address, and verify messages directly from the official website.",
 		},
 	],
-	socialengineering: [
+	"social engineering": [
 		{
 			id: 1,
 			question:
@@ -106,7 +106,7 @@ const questionSets = {
 				"Social engineering exploits human trust rather than technical vulnerabilities.",
 		},
 	],
-	passwordsecurity: [
+	"password security": [
 		{
 			id: 1,
 			question: "Which of these is the strongest password?",
