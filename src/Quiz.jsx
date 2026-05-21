@@ -111,7 +111,7 @@ const questionSets = {
 				"Spear phishing is personalized using details gathered from social media or data breaches making it much harder to spot.",
 		},
 	],
-	socialengineering: [
+	"social engineering": [
 		{
 			id: 1,
 			question:
@@ -208,7 +208,7 @@ const questionSets = {
 				"Verifying identity before acting is the most effective defense against social engineering.",
 		},
 	],
-	passwordsecurity: [
+	"password security": [
 		{
 			id: 1,
 			question: "Which of these is the strongest password?",
