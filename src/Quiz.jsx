@@ -318,13 +318,11 @@ export default function Quiz() {
 	const [result, setResult] = useState(null);
 
 	const [questions, setQuestions] = useState(() =>
-		pickRandom(questionSets[module] || questionSets.phishing, 4)
+		pickRandom(questionSets[module] || questionSets.phishing, 4),
 	);
 
 	const [shuffledOptions, setShuffledOptions] = useState(() =>
-		Object.fromEntries(
-			questions.map((q) => [q.id, shuffleArray(q.options)])
-		)
+		Object.fromEntries(questions.map((q) => [q.id, shuffleArray(q.options)])),
 	);
 
 	const handleSelect = (questionId, option) => {
@@ -340,7 +338,7 @@ export default function Quiz() {
 			return;
 		}
 
-		fetch("https://phishingsimulation-cjvx.onrender.com/quiz", {
+		fetch("http://127.0.0.1:5000/quiz", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -360,11 +358,11 @@ export default function Quiz() {
 	const resetQuiz = () => {
 		const newQuestions = pickRandom(
 			questionSets[module] || questionSets.phishing,
-			4
+			4,
 		);
 
 		const newShuffled = Object.fromEntries(
-			newQuestions.map((q) => [q.id, shuffleArray(q.options)])
+			newQuestions.map((q) => [q.id, shuffleArray(q.options)]),
 		);
 
 		setQuestions(newQuestions);
@@ -379,7 +377,9 @@ export default function Quiz() {
 
 			{questions.map((q) => (
 				<div key={q.id} style={{ marginBottom: "20px" }}>
-					<p><strong>{q.question}</strong></p>
+					<p>
+						<strong>{q.question}</strong>
+					</p>
 
 					{shuffledOptions[q.id].map((option) => (
 						<label key={option} style={{ display: "block" }}>
@@ -397,6 +397,7 @@ export default function Quiz() {
 			))}
 
 			<button
+				type="button"
 				onClick={handleSubmit}
 				disabled={Object.keys(answers).length !== questions.length}
 				style={{ padding: "10px", marginTop: "10px" }}
@@ -405,6 +406,7 @@ export default function Quiz() {
 			</button>
 
 			<button
+				type="button"
 				onClick={resetQuiz}
 				style={{ padding: "10px", marginLeft: "10px" }}
 			>
@@ -421,5 +423,3 @@ export default function Quiz() {
 		</div>
 	);
 }
-
-
