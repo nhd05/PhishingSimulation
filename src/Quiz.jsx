@@ -375,17 +375,54 @@ export default function Quiz() {
 	};
 
 	return (
-		<div style={{ padding: "20px", maxWidth: "700px", margin: "auto" }}>
-			<h1>{moduleTitle[module] || module} Quiz</h1>
+		<div
+			style={{
+				padding: "40px",
+				maxWidth: "700px",
+				margin: "auto",
+				fontFamily: "sans-serif",
+				color: "#e8eaf0",
+			}}
+		>
+			<h1 style={{ marginBottom: "30px", fontSize: "28px" }}>
+				{moduleTitle[module] || module} Quiz
+			</h1>
 
-			{questions.map((q) => (
-				<div key={q.id} style={{ marginBottom: "20px" }}>
-					<p>
-						<strong>{q.question}</strong>
+			{questions.map((q, index) => (
+				<div
+					key={q.id}
+					style={{
+						marginBottom: "25px",
+						padding: "20px",
+						border: "1px solid #2a2d3a",
+						borderRadius: "8px",
+						backgroundColor: "#1a1d27",
+					}}
+				>
+					<p style={{ fontWeight: "bold", marginBottom: "12px" }}>
+						{index + 1}. {q.question}
 					</p>
 
 					{shuffledOptions[q.id].map((option) => (
-						<label key={option} style={{ display: "block" }}>
+						<label
+							key={option}
+							style={{
+								display: "flex",
+								alignItems: "center",
+								gap: "8px",
+								padding: "8px",
+								marginBottom: "6px",
+								borderRadius: "5px",
+								cursor: "pointer",
+								backgroundColor:
+									answers[q.id] === option ? "#1e3a5f" : "#0f1117",
+								border:
+									answers[q.id] === option
+										? "1px solid #4a90d9"
+										: "1px solid #2a2d3a",
+								color: "#e8eaf0",
+							}}
+						>
 							<input
 								type="radio"
 								name={`question-${q.id}`}
@@ -399,28 +436,63 @@ export default function Quiz() {
 				</div>
 			))}
 
-			<button
-				type="button"
-				onClick={handleSubmit}
-				disabled={Object.keys(answers).length !== questions.length}
-				style={{ padding: "10px", marginTop: "10px" }}
-			>
-				Submit
-			</button>
+			<div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
+				<button
+					type="button"
+					onClick={handleSubmit}
+					disabled={Object.keys(answers).length !== questions.length}
+					style={{
+						padding: "10px 20px",
+						backgroundColor:
+							Object.keys(answers).length !== questions.length
+								? "#2a2d3a"
+								: "#00e5a0",
+						color:
+							Object.keys(answers).length !== questions.length
+								? "#7a7f96"
+								: "#0f1117",
+						border: "none",
+						borderRadius: "6px",
+						cursor:
+							Object.keys(answers).length !== questions.length
+								? "not-allowed"
+								: "pointer",
+						fontWeight: "600",
+					}}
+				>
+					Submit
+				</button>
 
-			<button
-				type="button"
-				onClick={resetQuiz}
-				style={{ padding: "10px", marginLeft: "10px" }}
-			>
-				Retry Quiz
-			</button>
+				<button
+					type="button"
+					onClick={resetQuiz}
+					style={{
+						padding: "10px 20px",
+						backgroundColor: "transparent",
+						color: "#7a7f96",
+						border: "1px solid #2a2d3a",
+						borderRadius: "6px",
+						cursor: "pointer",
+					}}
+				>
+					Retry Quiz
+				</button>
+			</div>
 
 			{result && (
-				<div style={{ marginTop: "20px" }}>
-					<h2>
+				<div
+					style={{
+						marginTop: "25px",
+						padding: "20px",
+						backgroundColor: "#1a1d27",
+						borderRadius: "8px",
+						border: "1px solid #00e5a0",
+					}}
+				>
+					<h2 style={{ margin: 0, color: "#00e5a0" }}>
 						Score: {result.score} / {questions.length}
 					</h2>
+					<p style={{ marginTop: "8px", color: "#7a7f96" }}>{result.message}</p>
 				</div>
 			)}
 		</div>
