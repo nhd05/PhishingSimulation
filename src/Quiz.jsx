@@ -111,7 +111,7 @@ const questionSets = {
 				"Spear phishing is personalized using details gathered from social media or data breaches making it much harder to spot.",
 		},
 	],
-	"social engineering": [
+	socialengineering: [
 		{
 			id: 1,
 			question:
@@ -208,7 +208,7 @@ const questionSets = {
 				"Verifying identity before acting is the most effective defense against social engineering.",
 		},
 	],
-	"password security": [
+	passwordsecurity: [
 		{
 			id: 1,
 			question: "Which of these is the strongest password?",
@@ -305,6 +305,12 @@ const questionSets = {
 	],
 };
 
+const moduleTitle = {
+	phishing: "Phishing",
+	socialengineering: "Social Engineering",
+	passwordsecurity: "Password Security",
+};
+
 export default function Quiz() {
 	const [searchParams] = useSearchParams();
 	const module = searchParams.get("module") || "phishing";
@@ -365,7 +371,7 @@ export default function Quiz() {
 
 	return (
 		<div style={{ padding: "20px", maxWidth: "700px", margin: "auto" }}>
-			<h1>{module.charAt(0).toUpperCase() + module.slice(1)} Quiz</h1>
+			<h1>{moduleTitle[module] || module} Quiz</h1>
 
 			{questions.map((q) => (
 				<div key={q.id} style={{ marginBottom: "20px" }}>
