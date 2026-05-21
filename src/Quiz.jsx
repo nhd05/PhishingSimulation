@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSearchParams, useNaviagte } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { Results } from './quiz_results';
 
 function shuffleArray(array) {
@@ -333,7 +333,7 @@ export default function Quiz() {
 		}));
 	};
 
-	const navigate = useNavigate();
+	const _navigate = useNavigate();
 	const handleSubmit = () => {
 		if (Object.keys(answers).length !== questions.length) {
 			alert("Please answer all questions before submitting.");
