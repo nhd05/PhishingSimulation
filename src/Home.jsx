@@ -107,54 +107,34 @@ export default function Home() {
 		<div style={styles.page}>
 			<nav style={styles.navbar}>
 				<div style={styles.logo}>🛡️ PhishSim</div>
-				<button
-					type="button"
-					onClick={goToTraining}
-					style={styles.navButton}
-				>
+				<button type="button" onClick={goToTraining} style={styles.navButton}>
 					Start Training
 				</button>
 			</nav>
 			<main style={styles.main}>
 				<section style={styles.hero}>
-					<div style={styles.badge}>
-						Welcome to your cyber awareness training
-					</div>
+					<div style={styles.badge}>Welcome to your cyber awareness training</div>
 					<h1 style={styles.title}>Phishing Simulation</h1>
 					<p style={styles.subtitle}>
-						Learn how to recognize phishing attacks, protect your
-						information, and stay secure online through interactive
-						training modules.
+						Learn how to recognize phishing attacks, protect your information,
+						and stay secure online through interactive training modules.
 					</p>
-					<button
-						type="button"
-						onClick={goToTraining}
-						style={styles.heroButton}
-					>
+					<button type="button" onClick={goToTraining} style={styles.heroButton}>
 						Start Training →
 					</button>
 				</section>
 				<section style={styles.cardGrid}>
 					<div style={{ ...styles.card, borderTop: "4px solid #38bdf8" }}>
 						<h2>📧 Phishing Detection</h2>
-						<p>
-							Learn how attackers disguise malicious emails and fake
-							websites.
-						</p>
+						<p>Learn how attackers disguise malicious emails and fake websites.</p>
 					</div>
 					<div style={{ ...styles.card, borderTop: "4px solid #22c55e" }}>
 						<h2>🔐 Password Security</h2>
-						<p>
-							Understand password best practices and stronger account
-							protection.
-						</p>
+						<p>Understand password best practices and stronger account protection.</p>
 					</div>
 					<div style={{ ...styles.card, borderTop: "4px solid #f59e0b" }}>
 						<h2>🧠 Social Engineering</h2>
-						<p>
-							Explore tactics attackers use to trick users into unsafe
-							actions.
-						</p>
+						<p>Explore tactics attackers use to trick users into unsafe actions.</p>
 					</div>
 				</section>
 			</main>
