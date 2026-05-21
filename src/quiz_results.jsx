@@ -1,22 +1,18 @@
 import { useState } from "react";
-import questions from './Quiz';
-import Quiz from './Quiz';
 
-export const Results = ({ answer }) => {
+export const Results = ({ answers, result, resetQuiz, questions }) => {
     return (
         <div style={{ padding: "20px", maxWidth: "700px", margin: "auto" }}>
                 <h3>Results</h3>
-                <ul style = {{listStyle: 'none', textAlight: 'left'}}>
+                <ul style = {{listStyle: 'none', textAlign: 'left'}}>
                     {
-                        options.map((elem, index) =>{
+                        questions.map((elem, index) =>{
 
                             return(
                                 <li>
                                     <h5>{index + 1}.{questions[index].question}</h5>
                                     <p>{elem}</p>
-                                    if(answers[q.id] !== option){
-                                        <p>{questions[index].feedback}</p>
-                                    }
+                                    {answers[questions.id] !== option && <p>{questions[index].feedback}</p>}
                                 </li>
                             )
                         })
@@ -32,13 +28,7 @@ export const Results = ({ answer }) => {
                 </button>
 
                 {/* RESULT DISPLAY */}
-                {result && (
-                    <div style={{ marginTop: "20px" }}>
-                        <h2>
-                            Score: {result.score} / {questions.length}
-                        </h2>
-                    </div>
-                )}
+                <Results answers = {answers} result = {result} resetQuiz = {resetQuiz} questions = {questions}/>
             </div>
     )
 }
