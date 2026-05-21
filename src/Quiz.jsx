@@ -11,7 +11,7 @@ const questions = [
       "A professional logo",
       "Proper spelling and grammar",
     ],
-     feedback: "Phishing emails may pretend to be from a known and reputable organization such as banks."
+    feedback: "Phishing emails may pretend to be from a known and reputable organization such as banks."
   },
   {
     id: 2,
@@ -66,6 +66,10 @@ export default function Quiz() {
     if (Object.keys(answers).length !== questions.length) {
       alert("Please answer all questions before submitting.");
       return;
+    } else {
+      return (
+        <Results/>
+      )
     }
 
     fetch("http://127.0.0.1:5000/quiz", {
@@ -121,13 +125,6 @@ export default function Quiz() {
         Submit
       </button>
 
-      <button
-        type="button"
-        onClick={resetQuiz}
-        style={{ padding: "10px", marginLeft: "10px" }}
-      >
-        Retry Quiz
-      </button>
 
       {/* RESULT DISPLAY */}
       {result && (
