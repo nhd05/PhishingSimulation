@@ -3,12 +3,9 @@ export default function SocialEngineering() {
 	const navigate = useNavigate();
 	return (
 		<div style={{ padding: "20px" }}>
-			<h1>Password Security</h1>
+			<h1>Social Engineering</h1>
 
-			<p>
-				Strong passwords should contain uppercase, lowercase, numbers, and
-				symbols.
-			</p>
+		
 
 			<p>
 				Social engineering is the broader umbrella that phishing falls under. At
