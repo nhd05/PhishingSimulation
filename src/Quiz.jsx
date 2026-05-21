@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { useNaviagte } from "react-router-dom";
+import { useSearchParams, useNaviagte } from "react-router-dom";
 import { Results } from './quiz_results';
 
 function shuffleArray(array) {
@@ -339,7 +338,7 @@ export default function Quiz() {
 		if (Object.keys(answers).length !== questions.length) {
 			alert("Please answer all questions before submitting.");
 		} else {
-			naviagte("/results");
+			naviagte("/Results");
 		}
 
 		fetch("https://phishingsimulation-cjvx.onrender.com/quiz", {
