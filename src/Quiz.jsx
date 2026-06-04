@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import { Results } from './quiz_results';
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 function shuffleArray(array) {
 	return [...array].sort(() => Math.random() - 0.5);
@@ -9,6 +8,7 @@ function shuffleArray(array) {
 function pickRandom(array, count) {
 	return shuffleArray(array).slice(0, count);
 }
+
 const questionSets = {
 	phishing: [
 		{
@@ -313,10 +313,11 @@ const moduleTitle = {
 
 export default function Quiz() {
 	const [searchParams] = useSearchParams();
+	const navigate = useNavigate();
 	const module = searchParams.get("module") || "phishing";
 
 	const [answers, setAnswers] = useState({});
-	const [result, setResult] = useState(null);
+	const [setResult] = useState(null);
 
 	const [questions, setQuestions] = useState(() =>
 		pickRandom(questionSets[module] || questionSets.phishing, 4),
@@ -333,12 +334,10 @@ export default function Quiz() {
 		}));
 	};
 
-	const _navigate = useNavigate();
 	const handleSubmit = () => {
 		if (Object.keys(answers).length !== questions.length) {
 			alert("Please answer all questions before submitting.");
-		} else {
-			_navigate("/Results");
+			return;
 		}
 
 		fetch("https://phishingsimulation-cjvx.onrender.com/quiz", {
@@ -346,13 +345,22 @@ export default function Quiz() {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({
-				module,
-				answers,
-			}),
+			body: JSON.stringify({ module, answers }),
 		})
 			.then((res) => res.json())
-			.then((data) => setResult(data))
+			.then((data) => {
+				navigate("/Results", {
+					state: {
+						score: data.score,
+						total: data.total,
+						breakdown: data.breakdown,
+						correctAnswers: data.correct_answers,
+						questions: questions,
+						answers: answers,
+						module: module,
+					},
+				});
+			})
 			.catch(() => {
 				alert("Backend not connected. Is Python running?");
 			});
@@ -363,11 +371,9 @@ export default function Quiz() {
 			questionSets[module] || questionSets.phishing,
 			4,
 		);
-
 		const newShuffled = Object.fromEntries(
 			newQuestions.map((q) => [q.id, shuffleArray(q.options)]),
 		);
-
 		setQuestions(newQuestions);
 		setShuffledOptions(newShuffled);
 		setAnswers({});
@@ -385,7 +391,7 @@ export default function Quiz() {
 			}}
 		>
 			<h1 style={{ marginBottom: "30px", fontSize: "28px" }}>
-				{moduleTitle[module] || module} Quiz
+				{moduleTitle[module] || module}
 			</h1>
 
 			{questions.map((q, index) => (
@@ -478,23 +484,6 @@ export default function Quiz() {
 					Retry Quiz
 				</button>
 			</div>
-
-			{result && (
-				<div
-					style={{
-						marginTop: "25px",
-						padding: "20px",
-						backgroundColor: "#1a1d27",
-						borderRadius: "8px",
-						border: "1px solid #00e5a0",
-					}}
-				>
-					<h2 style={{ margin: 0, color: "#00e5a0" }}>
-						Score: {result.score} / {questions.length}
-					</h2>
-					<p style={{ marginTop: "8px", color: "#7a7f96" }}>{result.message}</p>
-				</div>
-			)}
 		</div>
 	);
 }
