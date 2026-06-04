@@ -4,11 +4,9 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app, origins="*")
 
-# 👇 ADD IT HERE
 @app.route("/")
 def home():
     return "Flask is running"
-
 
 def check_answers(user_answers, correct_answers):
     score = 0
@@ -16,7 +14,6 @@ def check_answers(user_answers, correct_answers):
         if user_answers.get(qid) == correct:
             score += 1
     return score
-
 
 answers_key = {
     "phishing": {
@@ -62,11 +59,24 @@ def quiz():
 
     score = check_answers(answers, correct)
 
+    breakdown = {
+        qid: answers.get(qid) == correct_ans
+        for qid, correct_ans in correct.items()
+        if qid in answers
+    }
+
+    correct_for_asked = {
+        qid: correct_ans
+        for qid, correct_ans in correct.items()
+        if qid in answers
+    }
+
     return jsonify({
         "score": score,
-        "total": len(correct)
+        "total": len(answers),
+        "breakdown": breakdown,
+        "correct_answers": correct_for_asked
     })
-
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
