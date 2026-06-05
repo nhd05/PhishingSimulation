@@ -4,6 +4,7 @@ import Home from "./Home";
 import PasswordSecurity from "./PasswordSecurity";
 import Phishing from "./Phishing";
 import Quiz from "./Quiz";
+import { Results } from "./quiz_results";
 import SocialEngineering from "./SocialEngineering";
 import TrainingModules from "./TrainingModules";
 
@@ -22,6 +23,7 @@ function App() {
 
 			{/* Quiz */}
 			<Route path="/quiz" element={<Quiz />} />
+			<Route path="/Results" element={<Results />} />
 		</Routes>
 	);
 }
