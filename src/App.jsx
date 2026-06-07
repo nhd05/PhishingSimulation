@@ -7,10 +7,14 @@ import Quiz from "./Quiz";
 import { Results } from "./quiz_results";
 import SocialEngineering from "./SocialEngineering";
 import TrainingModules from "./TrainingModules";
+import Navbar from "./navbar";
+
 
 function App() {
 	return (
-		<Routes>
+		<div>
+			<Navbar />
+			<Routes>
 			<Route path="/" element={<Home />} />
 
 			{/* Modules Page */}
@@ -25,6 +29,8 @@ function App() {
 			<Route path="/quiz" element={<Quiz />} />
 			<Route path="/Results" element={<Results />} />
 		</Routes>
+		
+	</div>
 	);
 }
 
