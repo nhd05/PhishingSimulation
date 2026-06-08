@@ -1,3 +1,4 @@
+import Login from "./Login";
 import { Route, Routes } from "react-router-dom";
 
 import Home from "./Home";
@@ -11,6 +12,7 @@ function App() {
 	return (
 		<Routes>
 			<Route path="/" element={<Home />} />
+			<Route path="/login" element={<Login />} />
 
 			{/* Modules Page */}
 			<Route path="/training" element={<TrainingModules />} />
