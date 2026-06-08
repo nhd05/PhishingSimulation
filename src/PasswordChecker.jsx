@@ -125,7 +125,6 @@ export default function PasswordChecker() {
 
 				{password && (
 					<div style={{ marginTop: "1.5rem" }}>
-						{/* Strength bar */}
 						<div
 							style={{
 								display: "flex",
@@ -148,3 +147,95 @@ export default function PasswordChecker() {
 						</div>
 						<div
 							style={{
+								background: "#e5e7eb",
+								borderRadius: "4px",
+								height: "8px",
+								marginBottom: "1.25rem",
+							}}
+						>
+							<div
+								style={{
+									width: getBarWidth(),
+									height: "100%",
+									background: strength.color,
+									borderRadius: "4px",
+									transition: "width 0.3s ease",
+								}}
+							/>
+						</div>
+
+						<p
+							style={{ fontSize: "13px", color: "#6b7280", margin: "0 0 1rem" }}
+						>
+							Entropy: <strong>{entropy.toFixed(2)} bits</strong>
+						</p>
+
+						{suggestions.length > 0 ? (
+							<div
+								style={{
+									padding: "1rem",
+									background: "#fef2f2",
+									border: "1px solid #fca5a5",
+									borderRadius: "8px",
+								}}
+							>
+								<p
+									style={{
+										fontSize: "13px",
+										fontWeight: 500,
+										margin: "0 0 8px",
+										color: "#374151",
+									}}
+								>
+									Suggestions to improve:
+								</p>
+								<ul style={{ margin: 0, paddingLeft: "1.25rem" }}>
+									{suggestions.map((s) => (
+										<li
+											key={s}
+											style={{
+												fontSize: "13px",
+												color: "#ef4444",
+												marginBottom: "4px",
+											}}
+										>
+											{s}
+										</li>
+									))}
+								</ul>
+							</div>
+						) : (
+							<div
+								style={{
+									padding: "1rem",
+									background: "#f0fdf4",
+									border: "1px solid #86efac",
+									borderRadius: "8px",
+								}}
+							>
+								<p
+									style={{
+										fontSize: "13px",
+										color: "#22c55e",
+										fontWeight: 500,
+										margin: 0,
+									}}
+								>
+									✅ Great password!
+								</p>
+							</div>
+						)}
+					</div>
+				)}
+
+				<button
+					type="button"
+					onClick={() => navigate(-1)}
+					style={{ marginTop: "2rem", padding: "10px 20px", cursor: "pointer" }}
+				>
+					← Go Back
+				</button>
+			</div>
+		</div>
+	);
+}
