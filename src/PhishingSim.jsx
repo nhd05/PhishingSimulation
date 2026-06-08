@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 const TEMPLATES = [
-  { id: "prize", label: "Winning a prize", icon: "🎁" },
-  { id: "urgency", label: "Account suspended", icon: "⚠️" },
-  { id: "it", label: "IT / password reset", icon: "💻" },
-  { id: "bank", label: "Bank fraud alert", icon: "🏦" },
+	{ id: "prize", label: "Winning a prize", icon: "🎁" },
+	{ id: "urgency", label: "Account suspended", icon: "⚠️" },
+	{ id: "it", label: "IT / password reset", icon: "💻" },
+	{ id: "bank", label: "Bank fraud alert", icon: "🏦" },
 ];
 
 const PHISHING_SUBJECTS = {
@@ -29,243 +29,163 @@ const EXPLANATIONS = {
 };
 
 function PhishingSim() {
+
   const [email, setEmail] = useState("");
   const [selected, setSelected] = useState([]);
   const [status, setStatus] = useState("idle"); // idle | loading | success | feedback | result
   const [guesses, setGuesses] = useState({});
   const [score, setScore] = useState(null);
 
-  const toggleTemplate = (id) => {
-    setSelected((prev) =>
-      prev.includes(id)
-        ? prev.filter((t) => t !== id)
-        : prev.length < 2
-        ? [...prev, id]
-        : prev
-    );
-  };
 
-  const handleSend = async () => {
-    setStatus("loading");
-    try {
-      const res = await fetch("http://localhost:5000/send-phishing", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, templates: selected }),
-      });
-      if (res.ok) {
-        setStatus("success");
-      } else {
-        setStatus("error");
-      }
-    } catch (err) {
-      setStatus("error");
-    }
-  };
+	const toggleTemplate = (id) => {
+		setSelected((prev) =>
+			prev.includes(id)
+				? prev.filter((t) => t !== id)
+				: prev.length < 2
+					? [...prev, id]
+					: prev,
+		);
+	};
 
-  const handleGuess = (templateId, subject) => {
-    setGuesses((prev) => ({ ...prev, [templateId]: subject }));
-  };
+	const handleSend = async () => {
+		setStatus("loading");
+		try {
+			const res = await fetch("http://localhost:5000/send-phishing", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ email, templates: selected }),
+			});
 
-  const handleSubmitGuesses = () => {
-    let correct = 0;
-    selected.forEach((id) => {
-      if (guesses[id] === PHISHING_SUBJECTS[id]) correct++;
-    });
-    setScore(correct);
-    setStatus("result");
-  };
+			const data = await res.json();
+			console.log("Response:", data);
 
-  const allGuessed = selected.every((id) => guesses[id]);
-  const isValid = email.includes("@") && selected.length > 0;
+			if (res.ok) {
+				setStatus("success");
+			} else {
+				setStatus("error");
+			}
+		} catch (err) {
+			console.error(err);
+			setStatus("error");
+		}
+	};
 
-  // Step 2: feedback — user guesses which email was phishing
-  if (status === "success" || status === "feedback") {
-    return (
-      <div className="sim-wrap">
-        <div className="sim-card">
-          <h2>📬 Check your inbox!</h2>
-          <p>
-            We sent you <strong>{selected.length * 2} emails</strong>. Now guess — which subject line was the phishing email?
-          </p>
-          <p style={{ fontSize: "13px", color: "#6b7280", marginBottom: "1.5rem" }}>
-            Don't forget to check your spam folder too!
-          </p>
+	const isValid = email.includes("@") && selected.length > 0;
 
-          {selected.map((id) => {
-            const tmpl = TEMPLATES.find((t) => t.id === id);
-            return (
-              <div key={id} style={{ marginBottom: "1.5rem" }}>
-                <p style={{ fontWeight: 500, marginBottom: "8px" }}>
-                  {tmpl.icon} {tmpl.label} — which was the phishing email?
-                </p>
+	if (status === "success") {
+		return (
+			<div className="sim-wrap">
+				<div className="sim-card">
+					<h2>✅ Check your inbox!</h2>
+					<p>
+						We sent you <strong>{selected.length * 2} emails</strong> — one real
+						and one phishing for each type. Can you spot which is which?
+					</p>
+					<button
+						type="button"
+						onClick={() => {
+							setStatus("idle");
+							setEmail("");
+							setSelected([]);
+						}}
+					>
+						Try another
+					</button>
+				</div>
+			</div>
+		);
+	}
 
-                {[LEGIT_SUBJECTS[id], PHISHING_SUBJECTS[id]]
-                  .sort(() => Math.random() - 0.5)
-                  .map((subject) => (
-                    <label
-                      key={subject}
-                      style={{
-                        display: "flex",
-                        alignItems: "flex-start",
-                        gap: "10px",
-                        padding: "10px 14px",
-                        border: guesses[id] === subject ? "2px solid #3b82f6" : "1px solid #e5e7eb",
-                        borderRadius: "8px",
-                        marginBottom: "8px",
-                        cursor: "pointer",
-                        background: guesses[id] === subject ? "#eff6ff" : "white",
-                        fontSize: "13px",
-                        lineHeight: "1.5",
-                      }}
-                    >
-                      <input
-                        type="radio"
-                        name={id}
-                        value={subject}
-                        checked={guesses[id] === subject}
-                        onChange={() => handleGuess(id, subject)}
-                        style={{ marginTop: "2px", accentColor: "#3b82f6" }}
-                      />
-                      {subject}
-                    </label>
-                  ))}
-              </div>
-            );
-          })}
 
-          <button
-            className="sim-send-btn"
-            disabled={!allGuessed}
-            onClick={handleSubmitGuesses}
-          >
-            Submit my answers
-          </button>
-        </div>
-      </div>
-    );
-  }
+	return (
+		<div className="sim-wrap">
+			<div className="sim-card">
+				<span className="sim-badge">Security Training</span>
+				<h2>Phishing Simulation</h2>
+				<p className="sim-sub">
+					Enter your email and pick a scenario. You'll get two emails — one
+					legitimate and one phishing. Practice spotting the difference. (PLEASE
+					USE YOUR UW EMAIL FOR THE DEMO)
+				</p>
 
-  // Step 3: results
-  if (status === "result") {
-    return (
-      <div className="sim-wrap">
-        <div className="sim-card">
-          <h2>
-            {score === selected.length ? "🎉 Perfect score!" : score === 0 ? "😬 Not quite!" : "👍 Good effort!"}
-          </h2>
-          <p style={{ fontSize: "16px", marginBottom: "1.5rem" }}>
-            You got <strong>{score} out of {selected.length}</strong> correct.
-          </p>
 
-          {selected.map((id) => {
-            const tmpl = TEMPLATES.find((t) => t.id === id);
-            const isCorrect = guesses[id] === PHISHING_SUBJECTS[id];
-            return (
-              <div
-                key={id}
-                style={{
-                  border: `1px solid ${isCorrect ? "#86efac" : "#fca5a5"}`,
-                  borderRadius: "8px",
-                  padding: "14px 16px",
-                  marginBottom: "1rem",
-                  background: isCorrect ? "#f0fdf4" : "#fef2f2",
-                }}
-              >
-                <p style={{ fontWeight: 500, margin: "0 0 6px" }}>
-                  {isCorrect ? "✅" : "❌"} {tmpl.icon} {tmpl.label}
-                </p>
-                <p style={{ fontSize: "13px", color: "#374151", margin: "0 0 6px" }}>
-                  <strong>The phishing email was:</strong> "{PHISHING_SUBJECTS[id]}"
-                </p>
-                <p style={{ fontSize: "13px", color: "#6b7280", margin: 0 }}>
-                  {EXPLANATIONS[id]}
-                </p>
-              </div>
-            );
-          })}
+				<label htmlFor="email">Your email address</label>
+				<input
+					id="email"
+					type="email"
+					placeholder="you@example.com"
+					value={email}
+					onChange={(e) => setEmail(e.target.value)}
+				/>
 
-          <button
-            className="sim-send-btn"
-            style={{ marginTop: "1rem" }}
-            onClick={() => { setStatus("idle"); setEmail(""); setSelected([]); setGuesses({}); setScore(null); }}
-          >
-            Try again
-          </button>
-        </div>
-      </div>
-    );
-  }
+				<p style={{ marginTop: "1rem", fontWeight: "500" }}>
+					Choose a scenario (pick 1–2)
+				</p>
+				<div
+					style={{
+						display: "flex",
+						flexDirection: "column",
+						gap: "10px",
+						margin: "0.5rem 0 1.25rem",
+					}}
+				>
+					{TEMPLATES.map((t) => {
+						const isChecked = selected.includes(t.id);
+						return (
+							<label
+								key={t.id}
+								style={{
+									display: "flex",
+									alignItems: "center",
+									gap: "12px",
+									padding: "12px 16px",
+									border: isChecked ? "2px solid #3b82f6" : "1px solid #e5e7eb",
+									borderRadius: "8px",
+									cursor:
+										selected.length >= 2 && !isChecked
+											? "not-allowed"
+											: "pointer",
+									background: isChecked ? "#eff6ff" : "white",
+									opacity: selected.length >= 2 && !isChecked ? 0.5 : 1,
+								}}
+							>
+								<input
+									type="checkbox"
+									checked={isChecked}
+									onChange={() => toggleTemplate(t.id)}
+									disabled={selected.length >= 2 && !isChecked}
+									style={{
+										width: "18px",
+										height: "18px",
+										accentColor: "#3b82f6",
+										cursor: "pointer",
+									}}
+								/>
+								<span style={{ fontSize: "14px" }}>
+									{t.icon} {t.label}
+								</span>
+							</label>
+						);
+					})}
+				</div>
 
-  // Step 1: the form
-  return (
-    <div className="sim-wrap">
-      <div className="sim-card">
-        <span className="sim-badge">Security Training</span>
-        <h2>Phishing Simulation</h2>
-        <p className="sim-sub">
-          Enter your email and pick a scenario. You'll get two emails — one
-          legitimate and one phishing. Practice spotting the difference. (PLEASE USE YOUR UW EMAIL FOR THE DEMO)
-        </p>
+				{status === "error" && (
+					<p style={{ color: "red", fontSize: "13px" }}>
+						Something went wrong. Make sure Flask is running.
+					</p>
+				)}
 
-        <label>Your email address</label>
-        <input
-          type="email"
-          placeholder="you@example.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <label style={{ marginTop: "1rem" }}>
-          Choose a scenario (pick 1–2)
-        </label>
-        <div style={{ display: "flex", flexDirection: "column", gap: "10px", margin: "0.5rem 0 1.25rem" }}>
-          {TEMPLATES.map((t) => {
-            const isChecked = selected.includes(t.id);
-            return (
-              <label
-                key={t.id}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "12px",
-                  padding: "12px 16px",
-                  border: isChecked ? "2px solid #3b82f6" : "1px solid #e5e7eb",
-                  borderRadius: "8px",
-                  cursor: selected.length >= 2 && !isChecked ? "not-allowed" : "pointer",
-                  background: isChecked ? "#eff6ff" : "white",
-                  opacity: selected.length >= 2 && !isChecked ? 0.5 : 1,
-                }}
-              >
-                <input
-                  type="checkbox"
-                  checked={isChecked}
-                  onChange={() => toggleTemplate(t.id)}
-                  disabled={selected.length >= 2 && !isChecked}
-                  style={{ width: "18px", height: "18px", accentColor: "#3b82f6", cursor: "pointer" }}
-                />
-                <span style={{ fontSize: "14px" }}>{t.icon} {t.label}</span>
-              </label>
-            );
-          })}
-        </div>
-
-        {status === "error" && (
-          <p style={{ color: "red", fontSize: "13px" }}>
-            Something went wrong. Make sure Flask is running.
-          </p>
-        )}
-
-        <button
-          className="sim-send-btn"
-          disabled={!isValid || status === "loading"}
-          onClick={handleSend}
-        >
-          {status === "loading" ? "Sending..." : "Send me the emails"}
-        </button>
-      </div>
-    </div>
-  );
+				<button
+					type="button"
+					className="sim-send-btn"
+					disabled={!isValid || status === "loading"}
+					onClick={handleSend}
+				>
+					{status === "loading" ? "Sending..." : "Send me the emails"}
+				</button>
+			</div>
+		</div>
+	);
 }
 
 export default PhishingSim;
