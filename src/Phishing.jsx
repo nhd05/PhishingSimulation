@@ -79,6 +79,7 @@ export default function Phishing() {
 				being a tech expert — they're small habits that add up to a much
 				stronger defense.
 			</p>
+
 			<button
 				type="button"
 				onClick={() => navigate("/quiz?module=phishing")}
@@ -89,6 +90,19 @@ export default function Phishing() {
 				}}
 			>
 				Take Quiz
+			</button>
+
+			<button
+				type="button"
+				onClick={() => navigate("/phishing-sim")}
+				style={{
+					marginTop: "30px",
+					marginLeft: "10px",
+					padding: "10px 20px",
+					cursor: "pointer",
+				}}
+			>
+				Try Phishing Simulation
 			</button>
 		</div>
 	);
