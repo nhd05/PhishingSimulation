@@ -1,12 +1,23 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+from templates.phishing_emails import TEMPLATES
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app, origins="*")
 
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
+FROM_EMAIL = os.getenv("FROM_EMAIL")
+
 @app.route("/")
 def home():
     return "Flask is running"
+
 
 def check_answers(user_answers, correct_answers):
     score = 0
@@ -14,6 +25,7 @@ def check_answers(user_answers, correct_answers):
         if user_answers.get(qid) == correct:
             score += 1
     return score
+
 
 answers_key = {
     "phishing": {
@@ -51,32 +63,57 @@ answers_key = {
 @app.route("/quiz", methods=["POST"])
 def quiz():
     data = request.get_json()
-
     module = data.get("module", "phishing")
     answers = data.get("answers", {})
-
     correct = answers_key.get(module, answers_key["phishing"])
-
     score = check_answers(answers, correct)
-
-    breakdown = {
-        qid: answers.get(qid) == correct_ans
-        for qid, correct_ans in correct.items()
-        if qid in answers
-    }
-
-    correct_for_asked = {
-        qid: correct_ans
-        for qid, correct_ans in correct.items()
-        if qid in answers
-    }
-
     return jsonify({
         "score": score,
-        "total": len(answers),
-        "breakdown": breakdown,
-        "correct_answers": correct_for_asked
+        "total": len(correct)
     })
+
+
+@app.route("/send-phishing", methods=["POST"])
+def send_phishing():
+    data = request.get_json()
+    to_email = data.get("email")
+    chosen = data.get("templates", [])
+
+    if not to_email or not chosen:
+        return jsonify({"error": "email and templates required"}), 400
+
+    if len(chosen) > 2:
+        return jsonify({"error": "max 2 templates allowed"}), 400
+
+    errors = []
+    sent = 0
+
+    for key in chosen:
+        tmpl = TEMPLATES.get(key)
+        if not tmpl:
+            errors.append(f"Unknown template: {key}")
+            continue
+
+        for variant in ["legit", "phishing"]:
+            email = tmpl[variant]
+            message = Mail(
+                from_email=FROM_EMAIL,
+                to_emails=to_email,
+                subject=email["subject"],
+                html_content=email["body"],
+            )
+            try:
+                sg = SendGridAPIClient(SENDGRID_API_KEY)
+                sg.send(message)
+                sent += 1
+            except Exception as e:
+                errors.append(f"{key}/{variant}: {str(e)}")
+
+    if errors:
+        return jsonify({"status": "partial", "errors": errors}), 207
+
+    return jsonify({"status": "sent", "count": sent}), 200
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
