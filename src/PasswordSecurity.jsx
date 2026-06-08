@@ -72,12 +72,12 @@ export default function PasswordSecurity() {
 				Take Quiz
 			</button>
 			<button
-  type="button"
-  onClick={() => navigate("/password-checker")}
-  style={{ padding: "10px 20px", cursor: "pointer", marginLeft: "10px" }}
->
-  Try Password Checker
-</button>
+				type="button"
+				onClick={() => navigate("/password-checker")}
+				style={{ padding: "10px 20px", cursor: "pointer", marginLeft: "10px" }}
+			>
+				Try Password Checker
+			</button>
 		</div>
 	);
 }

@@ -8,34 +8,34 @@ const TEMPLATES = [
 ];
 
 const PHISHING_SUBJECTS = {
-  prize: "🎉 WINNER! Claim your $500 gift card NOW — expires in 2 hrs",
-  urgency: "⚠️ URGENT: Your account has been compromised — act within 24hrs",
-  it: "IT ALERT: Your password expires in 1 hour — reset immediately",
-  bank: "🚨 FRAUD ALERT: Unauthorized $2,847.00 transaction — verify NOW",
+	prize: "🎉 WINNER! Claim your $500 gift card NOW — expires in 2 hrs",
+	urgency: "⚠️ URGENT: Your account has been compromised — act within 24hrs",
+	it: "IT ALERT: Your password expires in 1 hour — reset immediately",
+	bank: "🚨 FRAUD ALERT: Unauthorized $2,847.00 transaction — verify NOW",
 };
 
 const LEGIT_SUBJECTS = {
-  prize: "You have a reward waiting — check the app",
-  urgency: "We noticed a new sign-in to your account",
-  it: "Reminder: Update your password in the employee portal",
-  bank: "Transaction alert: $2,847.00 charge on your account",
+	prize: "You have a reward waiting — check the app",
+	urgency: "We noticed a new sign-in to your account",
+	it: "Reminder: Update your password in the employee portal",
+	bank: "Transaction alert: $2,847.00 charge on your account",
 };
 
 const EXPLANATIONS = {
-  prize: "The phishing email used ALL CAPS, fake urgency, a suspicious prize, and asked for billing info. The real one directed you to log in yourself.",
-  urgency: "The phishing email used threatening language, red text, and a suspicious link. The real one told you to visit the site directly.",
-  it: "The phishing email pressured you to click a link and enter your current password — IT will never ask for that. The real one directed you to the portal yourself.",
-  bank: "The phishing email created panic with a fake fraud alert and a suspicious link. The real one told you to call the number on your card.",
+	prize:
+		"The phishing email used ALL CAPS, fake urgency, a suspicious prize, and asked for billing info. The real one directed you to log in yourself.",
+	urgency:
+		"The phishing email used threatening language, red text, and a suspicious link. The real one told you to visit the site directly.",
+	it: "The phishing email pressured you to click a link and enter your current password — IT will never ask for that. The real one directed you to the portal yourself.",
+	bank: "The phishing email created panic with a fake fraud alert and a suspicious link. The real one told you to call the number on your card.",
 };
 
 function PhishingSim() {
-
-  const [email, setEmail] = useState("");
-  const [selected, setSelected] = useState([]);
-  const [status, setStatus] = useState("idle"); // idle | loading | success | feedback | result
-  const [guesses, setGuesses] = useState({});
-  const [score, setScore] = useState(null);
-
+	const [email, setEmail] = useState("");
+	const [selected, setSelected] = useState([]);
+	const [status, setStatus] = useState("idle"); // idle | loading | success | feedback | result
+	const [guesses, setGuesses] = useState({});
+	const [score, setScore] = useState(null);
 
 	const toggleTemplate = (id) => {
 		setSelected((prev) =>
@@ -96,7 +96,6 @@ function PhishingSim() {
 		);
 	}
 
-
 	return (
 		<div className="sim-wrap">
 			<div className="sim-card">
@@ -107,7 +106,6 @@ function PhishingSim() {
 					legitimate and one phishing. Practice spotting the difference. (PLEASE
 					USE YOUR UW EMAIL FOR THE DEMO)
 				</p>
-
 
 				<label htmlFor="email">Your email address</label>
 				<input
