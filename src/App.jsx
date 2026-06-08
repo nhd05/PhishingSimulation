@@ -4,11 +4,11 @@ import Home from "./Home";
 import Navbar from "./Navbar";
 import PasswordSecurity from "./PasswordSecurity";
 import Phishing from "./Phishing";
+import PhishingSim from "./PhishingSim";
 import Quiz from "./Quiz";
 import { Results } from "./quiz_results";
 import SocialEngineering from "./SocialEngineering";
 import TrainingModules from "./TrainingModules";
-import PhishingSim from "./PhishingSim";
 
 function App() {
 	return (
