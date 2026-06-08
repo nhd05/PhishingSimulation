@@ -27,3 +27,7 @@ server/.venv
 server/venv
 .venv
 venv
+
+# Environment variables
+.env
+.env.local

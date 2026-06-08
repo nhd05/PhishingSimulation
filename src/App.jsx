@@ -6,6 +6,8 @@ import Phishing from "./Phishing";
 import Quiz from "./Quiz";
 import SocialEngineering from "./SocialEngineering";
 import TrainingModules from "./TrainingModules";
+import { Results } from "./quiz_results";
+import PhishingSim from "./PhishingSim";
 
 function App() {
 	return (
@@ -22,6 +24,8 @@ function App() {
 
 			{/* Quiz */}
 			<Route path="/quiz" element={<Quiz />} />
+			<Route path="/results" element={<Results />} />
+			<Route path="/phishing-sim" element={<PhishingSim />} />
 		</Routes>
 	);
 }

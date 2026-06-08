@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { useSearchParams, useNaviagte } from "react-router-dom";
+import {
+	useSearchParams,
+	useNavigate,
+} from "react-router-dom";
 import { Results } from './quiz_results';
 
 function shuffleArray(array) {
@@ -312,9 +315,10 @@ const moduleTitle = {
 };
 
 export default function Quiz() {
+	
 	const [searchParams] = useSearchParams();
 	const module = searchParams.get("module") || "phishing";
-
+	const navigate = useNavigate();
 	const [answers, setAnswers] = useState({});
 	const [result, setResult] = useState(null);
 
@@ -333,30 +337,37 @@ export default function Quiz() {
 		}));
 	};
 
-	const navigate = useNavigate();
+	
 	const handleSubmit = () => {
-		if (Object.keys(answers).length !== questions.length) {
-			alert("Please answer all questions before submitting.");
-		} else {
-			naviagte("/Results");
-		}
+	if (Object.keys(answers).length !== questions.length) {
+		alert("Please answer all questions before submitting.");
+		return;
+	}
 
-		fetch("https://phishingsimulation-cjvx.onrender.com/quiz", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				module,
-				answers,
-			}),
-		})
-			.then((res) => res.json())
-			.then((data) => setResult(data))
-			.catch(() => {
-				alert("Backend not connected. Is Python running?");
+	fetch("http://127.0.0.1:5000/quiz", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			module,
+			answers,
+		}),
+	})
+		.then((res) => res.json())
+		.then((data) => {
+			navigate("/results", {
+				state: {
+					answers,
+					result: data,
+					questions,
+				},
 			});
-	};
+		})
+		.catch(() => {
+			alert("Backend not connected. Is Python running?");
+		});
+};
 
 	const resetQuiz = () => {
 		const newQuestions = pickRandom(

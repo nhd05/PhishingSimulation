@@ -1,38 +1,44 @@
-export const Results = ({ answers, result, resetQuiz, questions }) => {
+import { useLocation, useNavigate } from "react-router-dom";
+
+export const Results = () => {
+	const location = useLocation();
+	const navigate = useNavigate();
+
+	const { answers, result, questions } = location.state || {};
+
+	if (!result || !questions) {
+		return <h2>No quiz results found.</h2>;
+	}
+
+	const resetQuiz = () => {
+		navigate("/quiz");
+	};
+
 	return (
 		<div style={{ padding: "20px", maxWidth: "700px", margin: "auto" }}>
-			<h3>Results</h3>
-			<ul style={{ listStyle: "none", textAlign: "left" }}>
-				{questions.map((elem, index) => {
-					return (
-						<li key={questions[index].id}>
-							<h5>
-								{index + 1}.{questions[index].question}
-							</h5>
-							<p>{elem}</p>
-							{answers[questions.id] !== option && (
-								<p>{questions[index].feedback}</p>
-							)}
-						</li>
-					);
-				})}
+			<h2>Quiz Results</h2>
+
+			<h3>
+				Score: {result.score}/{questions.length}
+			</h3>
+
+			<ul style={{ listStyle: "none", padding: 0 }}>
+				{questions.map((elem, index) => (
+					<li key={elem.id} style={{ marginBottom: "20px" }}>
+						<h4>
+							{index + 1}. {elem.question}
+						</h4>
+
+						<p>
+							<strong>Your Answer:</strong> {answers[elem.id]}
+						</p>
+
+						<p>{elem.feedback}</p>
+					</li>
+				))}
 			</ul>
 
-			<button
-				type="button"
-				onClick={resetQuiz}
-				style={{ padding: "10px", marginLeft: "10px" }}
-			>
-				Retry Quiz
-			</button>
-
-			{/* RESULT DISPLAY */}
-			<Results
-				answers={answers}
-				result={result}
-				resetQuiz={resetQuiz}
-				questions={questions}
-			/>
+			<button onClick={resetQuiz}>Retry Quiz</button>
 		</div>
 	);
 };
