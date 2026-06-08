@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
-
-import Login from "./Login";
 import Home from "./Home";
+import Login from "./Login";
 import Navbar from "./Navbar";
+import PasswordChecker from "./PasswordChecker";
 import PasswordSecurity from "./PasswordSecurity";
 import Phishing from "./Phishing";
 import PhishingSim from "./PhishingSim";
@@ -10,7 +10,6 @@ import Quiz from "./Quiz";
 import { Results } from "./quiz_results";
 import SocialEngineering from "./SocialEngineering";
 import TrainingModules from "./TrainingModules";
-import PasswordChecker from "./PasswordChecker";
 
 function App() {
 	return (
