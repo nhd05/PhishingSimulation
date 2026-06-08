@@ -8,35 +8,6 @@ const styles = {
 		padding: "0",
 		margin: "0",
 	},
-	navbar: {
-		display: "flex",
-		justifyContent: "space-between",
-		alignItems: "center",
-		padding: "24px 48px",
-		borderBottom: "1px solid rgba(255,255,255,0.08)",
-		backgroundColor: "#111827",
-		position: "sticky",
-		top: 0,
-		zIndex: 10,
-	},
-	logo: {
-		fontSize: "1.2rem",
-		fontWeight: "700",
-		color: "#f8fafc",
-		letterSpacing: "0.5px",
-	},
-	navButton: {
-		background: "#2563eb",
-		border: "none",
-		color: "white",
-		padding: "12px 22px",
-		borderRadius: "12px",
-		fontSize: "0.95rem",
-		fontWeight: "600",
-		cursor: "pointer",
-		transition: "all 0.2s ease",
-		boxShadow: "0 4px 14px rgba(37,99,235,0.35)",
-	},
 	main: {
 		maxWidth: "1150px",
 		margin: "0 auto",
@@ -105,12 +76,6 @@ export default function Home() {
 	};
 	return (
 		<div style={styles.page}>
-			<nav style={styles.navbar}>
-				<div style={styles.logo}>🛡️ PhishSim</div>
-				<button type="button" onClick={goToTraining} style={styles.navButton}>
-					Start Training
-				</button>
-			</nav>
 			<main style={styles.main}>
 				<section style={styles.hero}>
 					<div style={styles.badge}>
