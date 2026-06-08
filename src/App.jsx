@@ -9,6 +9,7 @@ import { Results } from "./quiz_results";
 import SocialEngineering from "./SocialEngineering";
 import TrainingModules from "./TrainingModules";
 import PhishingSim from "./PhishingSim";
+import PasswordChecker from "./PasswordChecker";
 
 function App() {
 	return (
@@ -25,6 +26,7 @@ function App() {
 				<Route path="/passwordsecurity" element={<PasswordSecurity />} />
 				<Route path="/socialengineering" element={<SocialEngineering />} />
 				<Route path="/phishing-sim" element={<PhishingSim />} />
+				<Route path="/password-checker" element={<PasswordChecker />} />
 
 				{/* Quiz */}
 				<Route path="/quiz" element={<Quiz />} />
