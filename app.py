@@ -67,9 +67,23 @@ def quiz():
     answers = data.get("answers", {})
     correct = answers_key.get(module, answers_key["phishing"])
     score = check_answers(answers, correct)
+    breakdown = {
+        qid: answers.get(qid) == correct_ans
+        for qid, correct_ans in correct.items()
+        if qid in answers
+    }
+
+    correct_for_asked = {
+        qid: correct_ans
+        for qid, correct_ans in correct.items()
+        if qid in answers
+    }
+
     return jsonify({
         "score": score,
-        "total": len(correct)
+        "total": len(answers),
+        "breakdown": breakdown,
+        "correct_answers": correct_for_asked
     })
 
 
