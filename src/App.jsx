@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
+import Login from "./Login";
 import Home from "./Home";
 import Navbar from "./Navbar";
 import PasswordSecurity from "./PasswordSecurity";
@@ -20,6 +21,7 @@ function App() {
 			<Navbar />
 			<Routes>
 				<Route path="/" element={<Home />} />
+				<Route path="/login" element={<Login />} />
 
 				{/* Modules Page */}
 				<Route path="/training" element={<TrainingModules />} />
