@@ -14,7 +14,7 @@ function Login() {
 		
 		try {
 		const userRef = doc(db, "users", email);
-		const userSnap = getDoc(userRef);
+		const userSnap = await getDoc(userRef);
 
 		if (!userSnap.exists()) {
 			setMessage("User not found");
