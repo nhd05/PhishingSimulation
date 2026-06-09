@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "./firebase";
 
 function Login() {
 	const navigate = useNavigate();
@@ -9,12 +11,27 @@ function Login() {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		const email = event.target.email.value;
+		
+		try {
+		const userRef = doc(db, "users", email);
+		const userSnap = await getDoc(userRef);
+
+		if (!userSnap.exists()) {
+			setMessage("User not found");
+			return;
+		}
+
+		const _userData = userSnap.data();
+
 		localStorage.setItem("loggedInUser", email);
 		setMessage("Login successful. Redirecting to home...");
 		setTimeout(() => {
 			navigate("/home");
 		}, 1200);
-	};
+	} catch (error) {
+		setMessage("Login error: " ${error.message});
+	}
+ };
 
 	const handleForgotPassword = (event) => {
 		event.preventDefault();

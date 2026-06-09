@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { db } from "./firebase";
 
 export const Results = () => {
 	const location = useLocation();
@@ -13,6 +14,9 @@ export const Results = () => {
 		answers,
 		module,
 	} = location.state || {};
+	
+	useEffect(() => {
+      if (!questions || !answers) return;
 
 	// save score to localStorage
 	useEffect(() => {
@@ -150,6 +154,7 @@ export const Results = () => {
 					);
 				})}
 			</ul>
+
 
 			<div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
 				<button
