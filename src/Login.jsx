@@ -10,9 +10,9 @@ function Login() {
 		event.preventDefault();
 		const email = event.target.email.value;
 		localStorage.setItem("loggedInUser", email);
-		setMessage("Login successful. Redirecting to training...");
+		setMessage("Login successful. Redirecting to home...");
 		setTimeout(() => {
-			navigate("/training");
+			navigate("/home");
 		}, 1200);
 	};
 
