@@ -31,9 +31,9 @@ function Login() {
 			navigate("/training");
 		}, 1200);
 	} catch (error) {
-		setMessage("Login error: ", error.message);
+		setMessage("Login error: " ${error.message});
 	}
-};
+ };
 
 	const handleForgotPassword = (event) => {
 		event.preventDefault();
