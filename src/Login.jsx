@@ -7,14 +7,14 @@ function Login() {
 	const [message, setMessage] = useState("");
 
 	const handleSubmit = (event) => {
-		event.preventDefault();
-		const email = event.target.email.value;
-		localStorage.setItem("loggedInUser", email);
-		setMessage("Login successful. Redirecting to training...");
-		setTimeout(() => {
-			navigate("/training");
-		}, 1200);
-	};
+    event.preventDefault();
+    const email = event.target.email.value;
+    localStorage.setItem("loggedInUser", email);
+    setMessage("Login successful. Redirecting to home...");
+    setTimeout(() => {
+        navigate("/home");
+    }, 1200);
+};
 
 	const handleForgotPassword = (event) => {
 		event.preventDefault();
