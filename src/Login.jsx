@@ -4,7 +4,7 @@ import "./Login.css";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "./firebase";
 
-async function Login() {
+function Login() {
 	const navigate = useNavigate();
 	const [message, setMessage] = useState("");
 
@@ -14,7 +14,7 @@ async function Login() {
 		
 		try {
 		const userRef = doc(db, "users", email);
-		const userSnap = await getDoc(userRef);
+		const userSnap = getDoc(userRef);
 
 		if (!userSnap.exists()) {
 			setMessage("User not found");
