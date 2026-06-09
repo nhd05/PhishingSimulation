@@ -1,4 +1,4 @@
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { db } from "./firebase";
@@ -17,22 +17,22 @@ export const Results = () => {
 	} = location.state || {};
 	
 	useEffect(() => {
-        if (!questions || !answers) return;
+      if (!questions || !answers) return;
 
-        async function saveResult() {
-            try {
-                await addDoc(collection(db, "quizResults"), {
-                    score,
-                    totalQuestions: total,
-                    percentage: (score / total) * 100,
-                    module,
-                });
+	  async function saveResult() {
+        try {
+          await addDoc(collection(db, "quizResults"), {
+            score,
+            totalQuestions: total,
+            percentage: (score / total) * 100,
+            module,
+          });
 
-                console.log("Quiz result saved");
-            } catch (error) {
-                console.error("Error saving quiz result:", error);
-            }
+		  console.log("Quiz result saved");
+        } catch (error) {
+          console.error("Error saving quiz result:", error);
         }
+      }
 
         saveResult();
     }, []);
