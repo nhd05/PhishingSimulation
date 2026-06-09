@@ -9,7 +9,7 @@ import os
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, origins="*")
+CORS(app)
 
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 FROM_EMAIL = os.getenv("FROM_EMAIL")
