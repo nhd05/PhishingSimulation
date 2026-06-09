@@ -1,4 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "./firebase";
 
 export const Results = () => {
 	const location = useLocation();
@@ -12,6 +15,28 @@ export const Results = () => {
 		answers,
 		module,
 	} = location.state || {};
+	
+	useEffect(() => {
+        if (!questions || !answers) return;
+
+        async function saveResult() {
+            try {
+                await addDoc(collection(db, "quizResults"), {
+                    score,
+                    totalQuestions: total,
+                    percentage: (score / total) * 100,
+                    module,
+                    completedAt: serverTimestamp(),
+                });
+
+                console.log("Quiz result saved");
+            } catch (error) {
+                console.error("Error saving quiz result:", error);
+            }
+        }
+
+        saveResult();
+    }, []);
 
 	if (!questions || !answers) {
 		return (
@@ -129,6 +154,7 @@ export const Results = () => {
 					);
 				})}
 			</ul>
+
 
 			<div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
 				<button
