@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export const Results = () => {
@@ -12,6 +13,26 @@ export const Results = () => {
 		answers,
 		module,
 	} = location.state || {};
+
+	// save score to localStorage
+	useEffect(() => {
+		if (score !== undefined && module) {
+			const user = localStorage.getItem("loggedInUser") || "guest";
+			const key = `quizScore_${user}_${module}`;
+			const existing = JSON.parse(localStorage.getItem(key) || "[]");
+
+			const last = existing[existing.length - 1];
+			const alreadySaved =
+				last &&
+				last.score === score &&
+				last.date === new Date().toLocaleDateString();
+
+			if (!alreadySaved) {
+				existing.push({ score, total, date: new Date().toLocaleDateString() });
+				localStorage.setItem(key, JSON.stringify(existing));
+			}
+		}
+	}, [score, total, module]);
 
 	if (!questions || !answers) {
 		return (
@@ -159,6 +180,21 @@ export const Results = () => {
 					}}
 				>
 					Back to Training
+				</button>
+				<button
+					type="button"
+					onClick={() => navigate("/dashboard")}
+					style={{
+						padding: "10px 20px",
+						backgroundColor: "#1a1d27",
+						color: "#00e5a0",
+						border: "1px solid #00e5a0",
+						borderRadius: "6px",
+						cursor: "pointer",
+						fontWeight: "600",
+					}}
+				>
+					View Dashboard
 				</button>
 			</div>
 		</div>
