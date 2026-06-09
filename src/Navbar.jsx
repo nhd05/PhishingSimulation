@@ -51,7 +51,7 @@ function Navbar() {
 				</NavLink>
 
 				<NavLink
-					to="/quiz"
+					to="/dashboard"
 					style={({ isActive }) => ({
 						color: isActive ? "#38bdf8" : "#cbd5e1",
 						textDecoration: "none",
@@ -59,7 +59,7 @@ function Navbar() {
 						fontWeight: isActive ? "700" : "500",
 					})}
 				>
-					📝 Quiz
+					📊 Dashboard
 				</NavLink>
 
 				<NavLink
