@@ -50,7 +50,7 @@ function PhishingSim() {
 	const handleSend = async () => {
 		setStatus("loading");
 		try {
-			const res = await fetch("https://phishingsimulation-backend.onrender.com/", {
+			const res = await fetch("https://phishingsimulation-backend.onrender.com/send-phishing", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ email, templates: selected }),
