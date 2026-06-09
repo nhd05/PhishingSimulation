@@ -4,7 +4,7 @@ import "./Login.css";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "./firebase";
 
-function Login() {
+async function Login() {
 	const navigate = useNavigate();
 	const [message, setMessage] = useState("");
 
@@ -31,7 +31,7 @@ function Login() {
 			navigate("/training");
 		}, 1200);
 	} catch (error) {
-		setMessage("Login error: " ${error.message});
+		setMessage("Login error: ", error.message);
 	}
 };
 
