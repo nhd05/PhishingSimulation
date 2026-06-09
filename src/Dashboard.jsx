@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 
 const modules = [
 	{ key: "phishing", label: "Phishing" },
-	{ key: "socialengineering", label: "Social Engineering" },
 	{ key: "passwordsecurity", label: "Password Security" },
+	{ key: "socialengineering", label: "Social Engineering" },	
 ];
 
 export default function Dashboard() {
