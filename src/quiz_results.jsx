@@ -1,6 +1,6 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useEffect } from "react";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { useLocation, useNavigate } from "react-router-dom";
 import { db } from "./firebase";
 
 export const Results = () => {
@@ -26,7 +26,6 @@ export const Results = () => {
                     totalQuestions: total,
                     percentage: (score / total) * 100,
                     module,
-                    completedAt: serverTimestamp(),
                 });
 
                 console.log("Quiz result saved");
@@ -38,7 +37,7 @@ export const Results = () => {
         saveResult();
     }, []);
 
-	if (!questions || !answers) {
+	if (!questions || !answer) {
 		return (
 			<div style={{ padding: "40px", color: "#e8eaf0", textAlign: "center" }}>
 				<p>No results found. Please take a quiz first.</p>
