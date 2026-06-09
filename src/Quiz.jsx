@@ -340,7 +340,7 @@ export default function Quiz() {
 			return;
 		}
 
-		fetch("https://phishingsimulation-cjvx.onrender.com/quiz", {
+		fetch("https://phishingsimulation-backend.onrender.com/", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
