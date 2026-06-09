@@ -21,7 +21,7 @@ function Login() {
 			return;
 		}
 
-		const userData = userSnap.data();
+		const _userData = userSnap.data();
 
 		localStorage.setItem("loggedInUser", email);
 
@@ -31,7 +31,7 @@ function Login() {
 			navigate("/training");
 		}, 1200);
 	} catch (error) {
-		setMessage("Login error: " + error.message);
+		setMessage("Login error: " ${error.message});
 	}
 };
 
