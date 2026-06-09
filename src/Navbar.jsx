@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
 	return (
@@ -24,40 +24,55 @@ function Navbar() {
 			>
 				🛡️ PhishSim
 			</div>
+
 			<div style={{ display: "flex", gap: "32px" }}>
-				<Link
+				<NavLink
 					to="/"
-					style={{
-						color: "#cbd5e1",
+					style={({ isActive }) => ({
+						color: isActive ? "#38bdf8" : "#cbd5e1",
 						textDecoration: "none",
 						fontSize: "0.95rem",
-						fontWeight: "500",
-					}}
+						fontWeight: isActive ? "700" : "500",
+					})}
 				>
 					🏠 Home
-				</Link>
-				<Link
+				</NavLink>
+
+				<NavLink
 					to="/training"
-					style={{
-						color: "#cbd5e1",
+					style={({ isActive }) => ({
+						color: isActive ? "#38bdf8" : "#cbd5e1",
 						textDecoration: "none",
 						fontSize: "0.95rem",
-						fontWeight: "500",
-					}}
+						fontWeight: isActive ? "700" : "500",
+					})}
 				>
 					📚 Training Modules
-				</Link>
-				<Link
-					to="/quiz"
-					style={{
-						color: "#cbd5e1",
+				</NavLink>
+
+				<NavLink
+					to="/dashboard"
+					style={({ isActive }) => ({
+						color: isActive ? "#38bdf8" : "#cbd5e1",
 						textDecoration: "none",
 						fontSize: "0.95rem",
-						fontWeight: "500",
-					}}
+						fontWeight: isActive ? "700" : "500",
+					})}
 				>
-					📝 Quiz
-				</Link>
+					📊 Dashboard
+				</NavLink>
+
+				<NavLink
+					to="/phishing-sim"
+					style={({ isActive }) => ({
+						color: isActive ? "#38bdf8" : "#cbd5e1",
+						textDecoration: "none",
+						fontSize: "0.95rem",
+						fontWeight: isActive ? "700" : "500",
+					})}
+				>
+					🎣 Phishing Sim
+				</NavLink>
 			</div>
 		</nav>
 	);

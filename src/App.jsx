@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import Dashboard from "./Dashboard";
 import Home from "./Home";
 import Login from "./Login";
 import Navbar from "./Navbar";
@@ -31,6 +32,7 @@ function App() {
 				{/* Quiz */}
 				<Route path="/quiz" element={<Quiz />} />
 				<Route path="/Results" element={<Results />} />
+				<Route path="/dashboard" element={<Dashboard />} />
 			</Routes>
 		</div>
 	);

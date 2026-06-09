@@ -7,21 +7,21 @@ const TEMPLATES = [
 	{ id: "bank", label: "Bank fraud alert", icon: "🏦" },
 ];
 
-const PHISHING_SUBJECTS = {
+const _PHISHING_SUBJECTS = {
 	prize: "🎉 WINNER! Claim your $500 gift card NOW — expires in 2 hrs",
 	urgency: "⚠️ URGENT: Your account has been compromised — act within 24hrs",
 	it: "IT ALERT: Your password expires in 1 hour — reset immediately",
 	bank: "🚨 FRAUD ALERT: Unauthorized $2,847.00 transaction — verify NOW",
 };
 
-const LEGIT_SUBJECTS = {
+const _LEGIT_SUBJECTS = {
 	prize: "You have a reward waiting — check the app",
 	urgency: "We noticed a new sign-in to your account",
 	it: "Reminder: Update your password in the employee portal",
 	bank: "Transaction alert: $2,847.00 charge on your account",
 };
 
-const EXPLANATIONS = {
+const _EXPLANATIONS = {
 	prize:
 		"The phishing email used ALL CAPS, fake urgency, a suspicious prize, and asked for billing info. The real one directed you to log in yourself.",
 	urgency:
@@ -34,8 +34,8 @@ function PhishingSim() {
 	const [email, setEmail] = useState("");
 	const [selected, setSelected] = useState([]);
 	const [status, setStatus] = useState("idle"); // idle | loading | success | feedback | result
-	const [guesses, setGuesses] = useState({});
-	const [score, setScore] = useState(null);
+	const [_guesses, _setGuesses] = useState({});
+	const [_score, _setScore] = useState(null);
 
 	const toggleTemplate = (id) => {
 		setSelected((prev) =>
@@ -50,11 +50,14 @@ function PhishingSim() {
 	const handleSend = async () => {
 		setStatus("loading");
 		try {
-			const res = await fetch("http://localhost:5000/send-phishing", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ email, templates: selected }),
-			});
+			const res = await fetch(
+				"https://phishingsimulation-backend.onrender.com/send-phishing",
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ email, templates: selected }),
+				},
+			);
 
 			const data = await res.json();
 			console.log("Response:", data);

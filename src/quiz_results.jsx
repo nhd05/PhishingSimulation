@@ -1,4 +1,3 @@
-import { addDoc, collection } from "firebase/firestore";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { db } from "./firebase";
@@ -19,25 +18,27 @@ export const Results = () => {
 	useEffect(() => {
       if (!questions || !answers) return;
 
-	  async function saveResult() {
-        try {
-          await addDoc(collection(db, "quizResults"), {
-            score,
-            totalQuestions: total,
-            percentage: (score / total) * 100,
-            module,
-          });
+	// save score to localStorage
+	useEffect(() => {
+		if (score !== undefined && module) {
+			const user = localStorage.getItem("loggedInUser") || "guest";
+			const key = `quizScore_${user}_${module}`;
+			const existing = JSON.parse(localStorage.getItem(key) || "[]");
 
-		  console.log("Quiz result saved");
-        } catch (error) {
-          console.error("Error saving quiz result:", error);
-        }
-      }
+			const last = existing[existing.length - 1];
+			const alreadySaved =
+				last &&
+				last.score === score &&
+				last.date === new Date().toLocaleDateString();
 
-        saveResult();
-    }, []);
+			if (!alreadySaved) {
+				existing.push({ score, total, date: new Date().toLocaleDateString() });
+				localStorage.setItem(key, JSON.stringify(existing));
+			}
+		}
+	}, [score, total, module]);
 
-	if (!questions || !answer) {
+	if (!questions || !answers) {
 		return (
 			<div style={{ padding: "40px", color: "#e8eaf0", textAlign: "center" }}>
 				<p>No results found. Please take a quiz first.</p>
@@ -184,6 +185,21 @@ export const Results = () => {
 					}}
 				>
 					Back to Training
+				</button>
+				<button
+					type="button"
+					onClick={() => navigate("/dashboard")}
+					style={{
+						padding: "10px 20px",
+						backgroundColor: "#1a1d27",
+						color: "#00e5a0",
+						border: "1px solid #00e5a0",
+						borderRadius: "6px",
+						cursor: "pointer",
+						fontWeight: "600",
+					}}
+				>
+					View Dashboard
 				</button>
 			</div>
 		</div>
